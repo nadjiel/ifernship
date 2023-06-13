@@ -5,6 +5,39 @@ const saveInternship = async (req, res) => {
   const internship = req.body;
 
   //TODO VALIDACOES
+  if(
+    typeof internship.professionalProfile != "string" ||
+    !internship.professionalProfile
+  ) {
+    res.status(400).send("Perfil do profissional inválido ou não informado.");
+    return;
+  }
+
+  if(
+    typeof internship.jobProfile != "string" ||
+    !internship.jobProfile
+  ) {
+    res.status(400).send("Perfil da vaga inválido ou não informado.");
+    return;
+  }
+
+  if(
+    (typeof internship.benefits != "string" || internship.benefits == "") &&
+    internship.benefits != undefined
+  ) {
+    res.status(400).send("Benefícios devem ser string não vazia ou undefined.");
+    return;
+  }
+
+  if(
+    internship.workModality != "presencial" &&
+    internship.workModality != "remoto" &&
+    internship.workModality != "híbrido"
+  ) {
+    res.status(400).send("Modalidade de trabalho deve ser presencial, remoto ou híbrido.");
+    return;
+  }
+
   // if (internship.title === undefined || internship.content === undefined) {
   //   res.status(400).send("Título e conteúdo devem ser informados.");
   //   return;
