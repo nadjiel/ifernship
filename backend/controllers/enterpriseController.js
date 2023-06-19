@@ -1,123 +1,117 @@
-import { ObjectID } from "bson";
-import client from "../database/index.js";
+import Enterprise from "../models/enterpriseModel.js";
 
 const saveEnterprise = async (req, res) => {
-  const enterprise = req.body;
-
-  //TODO VALIDACOES
-
   try {
-    await client.connect();
-    const enterprisesCollection = client
-      .db("ifernship")
-      .collection("enterprises");
-    const { insertedId } = await enterprisesCollection.insertOne(enterprise);
+    const {
+      name,
+      description,
+      cnpj,
+      email,
+      picture,
+      city,
+      state,
+      latitude,
+      longitude
+    } = req.body;
+
+    await Enterprise.create({
+      name,
+      description,
+      cnpj,
+      email,
+      picture,
+      city,
+      state,
+      latitude,
+      longitude
+    });
 
     res.status(201).send("Empresa criada.");
   } catch {
     res.status(400).send("Falha ao salvar.");
-  } finally {
-    client.close();
   }
 };
 
 const listEnterprises = async (req, res) => {
   try {
-    await client.connect();
-    const enterprisesCollection = client
-      .db("ifernship")
-      .collection("enterprises");
-
-    const enterprises = await enterprisesCollection.find().toArray();
+    const enterprises = await Enterprise.find();
 
     res.status(200).send(enterprises);
   } catch {
     res.status(400).send("Falha ao listar.");
-  } finally {
-    client.close();
   }
 };
 
 const findEnterprise = async (req, res) => {
-  const { id } = req.params;
-
   try {
-    await client.connect();
-    const enterprisesCollection = client
-      .db("ifernship")
-      .collection("enterprises");
+    const { id } = req.params;
 
-    const enterprise = await enterprisesCollection.findOne({
-      _id: new ObjectID(id),
-    });
+    const enterprise = await Enterprise.findById(id);
 
-    if (!enterprise) {
-      res.status(400).send("Empresa não encontrada.");
-      return;
+    if(!enterprise) {
+      return res.status(404).send(`Não há empresa com o ID ${id}.`);
     }
 
     res.status(200).send(enterprise);
   } catch {
     res.status(400).send("Falha ao obter empresa.");
-  } finally {
-    client.close();
   }
 };
 
 const deleteEnterprise = async (req, res) => {
-  const { id } = req.params;
-
   try {
-    await client.connect();
-    const enterprisesCollection = client
-      .db("ifernship")
-      .collection("enterprises");
-    const result = await enterprisesCollection.deleteOne({
-      _id: new ObjectID(id),
-    });
+    const { id } = req.params;
 
-    if (result.deletedCount === 0) {
-      res.status(400).send("Empresa não encontrada.");
-      return;
+    const enterprise = await Enterprise.findByIdAndDelete(id);
+
+    if(!enterprise) {
+      return res.status(404).send(`Não há empresa com o ID ${id}.`);
     }
 
     res.status(200).send("Empresa deletada com sucesso!");
   } catch {
     res.status(400).send("Falha ao deletar.");
-  } finally {
-    client.close();
   }
 };
 
 const updateEnterprise = async (req, res) => {
-  //TODO ADICIONAR E VALIDAR OUTROS ATRIBUTOS
-  const { name } = req.body;
-  const { id } = req.params;
-
   try {
-    await client.connect();
-    const enterprisesCollection = client
-      .db("ifernship")
-      .collection("enterprises");
-    const result = await enterprisesCollection.updateOne(
-      { _id: new ObjectID(id) },
+    const { id } = req.params;
+    const {
+      name,
+      description,
+      cnpj,
+      email,
+      picture,
+      city,
+      state,
+      latitude,
+      longitude
+    } = req.body;
+
+    const enterprise = await Enterprise.findByIdAndUpdate(
+      id,
       {
-        $set: {
-          name,
-        },
-      }
+        name,
+        description,
+        cnpj,
+        email,
+        picture,
+        city,
+        state,
+        latitude,
+        longitude
+      },
+      { new: true, runValidators: true }
     );
 
-    if (result.modifiedCount === 0) {
-      res.status(400).send("Empresa não encontrada.");
-      return;
+    if(!enterprise) {
+      return res.status(404).send(`Não há empresa com o ID ${id}.`);
     }
 
     res.status(200).send("Empresa atualizada!");
   } catch {
     res.status(400).send("Falha ao atualizar.");
-  } finally {
-    client.close();
   }
 };
 
