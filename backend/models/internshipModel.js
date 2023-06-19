@@ -36,13 +36,13 @@ const schema = mongoose.Schema({
     default: true
   },
   coordinatorEmail: {
-    type: mongoose.Types.ObjectId,
-    ref: "Coordinator",
+    type: String,
+    ref: "Coordinator.email",
     required: [ true, "Email do coordenador deve ser informado" ]
   },
   enterpriseCnpj: {
-    type: mongoose.Types.ObjectId,
-    ref: "Enterprise",
+    type: String,
+    ref: "Enterprise.cnpj",
     required: [ true, "CNPJ da empresa deve ser informado" ]
   },
 }, { timestamps: true });
