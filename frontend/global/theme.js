@@ -26,10 +26,10 @@ export default theme = {
     assistantSemibold: "assistant-semibold"
   },
   fontSizes: {
-    xs: "30px",
-    s: "20px",
+    xl: "30px",
+    l: "20px",
     m: "16px",
-    l: "14px",
-    xl: "12px",
+    s: "14px",
+    xs: "12px",
   }
 };
