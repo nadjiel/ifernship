@@ -1,8 +1,8 @@
 import { Text } from "./style.js";
 
-export default function Title({ level, color, align, children }) {
+export default function Title({ level, font, color, align, children }) {
   return (
-    <Text level={ level } color={ color } align={ align }>
+    <Text level={ level } font={ font } color={ color } align={ align }>
       { children }
     </Text>
   );

@@ -1,29 +1,23 @@
 import styled, { css } from "styled-components/native";
 
-export const Text = styled.Text`
-  color: ${ ({ color }) => color ? color : "#030A1D" };
-  text-align: ${ ({ align }) => align ? align : "center" };
+import theme from "../../global/theme.js";
 
-  font-size: 30px;
-  font-weight: 700;
+export const Text = styled.Text`
+  color: ${ ({ color }) => color ? color : theme.fontColors.primary };
+  text-align: ${ ({ align }) => align ? align : "center" };
+  
+  font-family: ${ theme.fonts.outfitBold };
+  font-size: ${ theme.fontSizes.xl };
 
   ${ ({ level }) => level == "2" && css`
-    font-size: 28px;
-    font-weight: 700;
+    font-family: ${ theme.fonts.poppinsSemibold };
+    font-size: ${ theme.fontSizes.l };
   ` }
 
   ${ ({ level }) => level == "3" && css`
-    font-size: 20px;
-    font-weight: 600;
+    font-family: ${ theme.fonts.poppinsSemibold };
+    font-size: ${ theme.fontSizes.m };
   ` }
 
-  ${ ({ level }) => level == "4" && css`
-    font-size: 18px;
-    font-weight: 600;
-  ` }
-
-  ${ ({ level }) => level == "5" && css`
-    font-size: 16px;
-    font-weight: 600;
-  ` }
+  ${ ({ font }) => font && `font-family: ${ font };` }
 `;
