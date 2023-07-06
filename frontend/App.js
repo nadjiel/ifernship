@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
 import { useFonts } from "expo-font";
 
-import Title from "./components/Title/index.jsx";
+import Home from './screens/Home/index.jsx';
 
 export default function App() {
   const [ fontsLoaded ] = useFonts({
@@ -24,19 +24,10 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Title>Hello, World!</Title>
-      <Text>Open up App.js to start working on your app!</Text>
+    <View>
+      <Home />
+
       <StatusBar style="auto" />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
