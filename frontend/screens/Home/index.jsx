@@ -1,9 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image } from 'react-native';
 
 import Title from "../../components/Title/index.jsx";
 import Paragraph from "../../components/Paragraph/index.jsx";
 import Button from "../../components/Button/index.jsx";
+
+import styles from "./style.js";
 
 export default function Home() {
   return (
@@ -29,24 +31,3 @@ export default function Home() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center"
-  },
-  logo: {
-    marginTop: 100
-  },
-  main: {
-    gap: 25,
-    marginTop: 100,
-    marginHorizontal: 25
-  },
-  buttons: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    gap: 25,
-    marginTop: 100,
-    marginHorizontal: 25
-  }
-});
