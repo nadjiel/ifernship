@@ -11,7 +11,7 @@ const saveInternship = async (req, res) => {
       workModality,
       weeklyWorkload,
       applicationProcedures,
-      enterpriseCnpj
+      enterpriseCnpj,
     } = req.body;
 
     await Internship.create({
@@ -22,12 +22,12 @@ const saveInternship = async (req, res) => {
       weeklyWorkload,
       applicationProcedures,
       // coordinatorEmail: "coordinator1@email.com",
-      enterpriseCnpj
+      enterpriseCnpj,
     });
 
     res.status(201).send("Estágio criado.");
-  } catch {
-    res.status(400).send("Falha ao salvar.");
+  } catch (ex) {
+    res.status(400).send(ex?.errors || "Falha ao salvar.");
   }
 };
 
@@ -36,8 +36,8 @@ const listInternships = async (req, res) => {
     const internships = await Internship.find();
 
     res.status(200).send(internships);
-  } catch {
-    res.status(400).send("Falha ao listar.");
+  } catch (ex) {
+    res.status(400).send(ex?.errors || "Falha ao listar.");
   }
 };
 
@@ -47,13 +47,13 @@ const findInternship = async (req, res) => {
 
     const internship = await Internship.findById(id);
 
-    if(!internship) {
+    if (!internship) {
       return res.status(404).send(`Não há estágio com o ID ${id}.`);
     }
 
     res.status(200).send(internship);
-  } catch {
-    res.status(400).send("Falha ao obter estágio.");
+  } catch (ex) {
+    res.status(400).send(ex?.errors || "Falha ao obter estágio.");
   }
 };
 
@@ -63,13 +63,13 @@ const deleteInternship = async (req, res) => {
 
     const internship = await Internship.findByIdAndDelete(id);
 
-    if(!internship) {
+    if (!internship) {
       return res.status(404).send(`Não há estágio com o ID ${id}.`);
     }
 
     res.status(200).send("Estágio deletado com sucesso!");
-  } catch {
-    res.status(400).send("Falha ao deletar.");
+  } catch (ex) {
+    res.status(400).send(ex?.errors || "Falha ao deletar.");
   }
 };
 
@@ -85,7 +85,7 @@ const updateInternship = async (req, res) => {
       applicationProcedures,
       available,
       coordinatorEmail,
-      enterpriseCnpj
+      enterpriseCnpj,
     } = req.body;
 
     const internship = await Internship.findByIdAndUpdate(
@@ -99,18 +99,18 @@ const updateInternship = async (req, res) => {
         applicationProcedures,
         available,
         coordinatorEmail,
-        enterpriseCnpj
+        enterpriseCnpj,
       },
       { new: true, runValidators: true }
     );
 
-    if(!internship) {
+    if (!internship) {
       return res.status(404).send(`Não há estágio com o ID ${id}.`);
     }
 
     res.status(200).send("Estágio atualizado!");
-  } catch {
-    res.status(400).send("Falha ao atualizar.");
+  } catch (ex) {
+    res.status(400).send(ex?.errors || "Falha ao atualizar.");
   }
 };
 

@@ -26,6 +26,10 @@ const schema = mongoose.Schema(
         message: "O tipo de usuário deve ser estagiário ou coordenador",
       },
     },
+    image: {
+      data: Buffer,
+      contentType: String,
+    },
   },
   { timestamps: true }
 );

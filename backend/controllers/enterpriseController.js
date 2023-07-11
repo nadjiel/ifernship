@@ -11,7 +11,7 @@ const saveEnterprise = async (req, res) => {
       city,
       state,
       latitude,
-      longitude
+      longitude,
     } = req.body;
 
     await Enterprise.create({
@@ -23,12 +23,12 @@ const saveEnterprise = async (req, res) => {
       city,
       state,
       latitude,
-      longitude
+      longitude,
     });
 
     res.status(201).send("Empresa criada.");
-  } catch {
-    res.status(400).send("Falha ao salvar.");
+  } catch (ex) {
+    res.status(400).send(ex?.errors || "Falha ao salvar.");
   }
 };
 
@@ -37,8 +37,8 @@ const listEnterprises = async (req, res) => {
     const enterprises = await Enterprise.find();
 
     res.status(200).send(enterprises);
-  } catch {
-    res.status(400).send("Falha ao listar.");
+  } catch (ex) {
+    res.status(400).send(ex?.errors || "Falha ao listar.");
   }
 };
 
@@ -48,13 +48,13 @@ const findEnterprise = async (req, res) => {
 
     const enterprise = await Enterprise.findById(id);
 
-    if(!enterprise) {
+    if (!enterprise) {
       return res.status(404).send(`Não há empresa com o ID ${id}.`);
     }
 
     res.status(200).send(enterprise);
-  } catch {
-    res.status(400).send("Falha ao obter empresa.");
+  } catch (ex) {
+    res.status(400).send(ex?.errors || "Falha ao obter empresa.");
   }
 };
 
@@ -64,13 +64,13 @@ const deleteEnterprise = async (req, res) => {
 
     const enterprise = await Enterprise.findByIdAndDelete(id);
 
-    if(!enterprise) {
+    if (!enterprise) {
       return res.status(404).send(`Não há empresa com o ID ${id}.`);
     }
 
     res.status(200).send("Empresa deletada com sucesso!");
-  } catch {
-    res.status(400).send("Falha ao deletar.");
+  } catch (ex) {
+    res.status(400).send(ex?.errors || "Falha ao deletar.");
   }
 };
 
@@ -86,7 +86,7 @@ const updateEnterprise = async (req, res) => {
       city,
       state,
       latitude,
-      longitude
+      longitude,
     } = req.body;
 
     const enterprise = await Enterprise.findByIdAndUpdate(
@@ -100,18 +100,18 @@ const updateEnterprise = async (req, res) => {
         city,
         state,
         latitude,
-        longitude
+        longitude,
       },
       { new: true, runValidators: true }
     );
 
-    if(!enterprise) {
+    if (!enterprise) {
       return res.status(404).send(`Não há empresa com o ID ${id}.`);
     }
 
     res.status(200).send("Empresa atualizada!");
-  } catch {
-    res.status(400).send("Falha ao atualizar.");
+  } catch (ex) {
+    res.status(400).send(ex?.errors || "Falha ao atualizar.");
   }
 };
 
