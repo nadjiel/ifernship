@@ -11,4 +11,11 @@ export default styles = StyleSheet.create({
 		marginBottom: 10,
 		marginHorizontal: 25,
 	},
+    
+    buttons: {
+		marginTop: 30,
+		width: '100%',
+		flexDirection: 'row',
+		justifyContent: 'center',
+	},
 });
