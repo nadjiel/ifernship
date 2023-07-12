@@ -1,8 +1,10 @@
-import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
-import { useFonts } from "expo-font";
+import "react-native-gesture-handler";
 
-import Home from './screens/Home/index.jsx';
+import { StatusBar } from 'expo-status-bar';
+import { useFonts } from "expo-font";
+import { NavigationContainer } from "@react-navigation/native";
+
+import MainNavigator from "./routes/MainNavigator.js";
 
 export default function App() {
   const [ fontsLoaded ] = useFonts({
@@ -24,10 +26,10 @@ export default function App() {
   }
 
   return (
-    <View>
-      <Home />
+    <NavigationContainer>
+      <MainNavigator />
 
       <StatusBar style="auto" />
-    </View>
+    </NavigationContainer>
   );
 }
