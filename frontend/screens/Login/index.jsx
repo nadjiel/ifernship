@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { View, Image, TextInput } from 'react-native';
+import { View, Image } from 'react-native';
 
 import Title from '../../components/Title/index.jsx';
 import Paragraph from '../../components/Paragraph/index.jsx';
