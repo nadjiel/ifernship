@@ -9,7 +9,7 @@ const __dirname = dirname(__filename);
 
 const register = async (req, res) => {
   try {
-    const { name, email, password, course, type } = req.body;
+    const { name, email, password, confirmPassword, course, type } = req.body;
 
     const user = await User.findOne({
       email: email,
@@ -17,6 +17,10 @@ const register = async (req, res) => {
 
     if (user) {
       return res.status(400).send("Já existe um usuário com esse email.");
+    }
+
+    if (password !== confirmPassword) {
+      return res.status(400).send("As senhas não coincidem.");
     }
 
     const passwordHash = password ? await hash(password, 10) : undefined;
