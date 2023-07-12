@@ -4,6 +4,8 @@ import Title from '../../components/Title/index.jsx';
 import Button from '../../components/Button/index.jsx';
 import InputText from '../../components/Input/index.jsx';
 
+import ImagePicker from 'react-native-image-picker';
+
 import styles from './style.js';
 
 export default function EmpresaForm() {
@@ -13,7 +15,7 @@ export default function EmpresaForm() {
 				<Title>Adicionar dados da Empresa</Title>
 			</View>
 
-            <View>
+			<View>
 				<InputText placeholderText={'Nome'} />
 				<InputText placeholderText={'Sobre a empresa'} />
 				<InputText placeholderText={'CNPJ'} />
@@ -21,13 +23,14 @@ export default function EmpresaForm() {
 				<InputText placeholderText={'Cidade'} />
 				<InputText placeholderText={'Latitude'} />
 				<InputText placeholderText={'Longitude'} />
+				<ImagePicker />
 			</View>
 
-            <View style={styles.buttons}>
+			<View style={styles.buttons}>
 				<Button>Finalizar</Button>
 			</View>
 
-            <StatusBar style="auto" />
+			<StatusBar style="auto" />
 		</View>
 	);
 }
