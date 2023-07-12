@@ -5,6 +5,6 @@ import theme from "../../global/theme.js";
 export const Text = styled.Text`
   color: ${ ({ color }) => color ? color : theme.fontColors.primary };
   font-family: ${ ({ font }) => font ? font : theme.fonts.outfitLight };
-  font-size: ${ ({ size }) => size ? size : theme.fontSizes.s };
+  font-size: ${ ({ size }) => size ? size : theme.fontSizes.l };
   text-align: ${ ({ align }) => align ? align : "center" };
 `;
