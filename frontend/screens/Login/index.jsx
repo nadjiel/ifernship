@@ -27,7 +27,7 @@ export default function Login() {
 			</View>
 
 			<View>
-				<InputText placeholderText={'Nome'} />
+				<InputText placeholderText={'Email'} />
 				<InputText
 					placeholderText={'Senha'}
 					secureTextEntryText={true}
