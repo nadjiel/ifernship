@@ -6,6 +6,7 @@ export default function InputText({
   placeholderText,
   secureTextEntryText,
   keyboardTypeText,
+  multilineText,
   control,
   name,
   error,
@@ -20,6 +21,7 @@ export default function InputText({
             placeholder={placeholderText}
             secureTextEntry={secureTextEntryText}
             keyboardType={keyboardTypeText}
+            multiline={multilineText}
             onChangeText={onChange}
             onBlur={onBlur}
             value={value}
