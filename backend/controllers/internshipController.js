@@ -2,27 +2,28 @@ import Internship from "../models/internshipModel.js";
 
 const saveInternship = async (req, res) => {
   try {
-    // const { email: coordinatorEmail } = req.user;
-
     const {
+      position,
       professionalProfile,
       jobProfile,
       benefits,
       workModality,
+      activity,
       weeklyWorkload,
       applicationProcedures,
-      enterpriseCnpj,
+      enterpriseId,
     } = req.body;
 
     await Internship.create({
+      position,
       professionalProfile,
       jobProfile,
       benefits,
       workModality,
+      activity,
       weeklyWorkload,
       applicationProcedures,
-      // coordinatorEmail: "coordinator1@email.com",
-      enterpriseCnpj,
+      enterpriseId,
     });
 
     res.status(201).send("Estágio criado.");
@@ -33,7 +34,7 @@ const saveInternship = async (req, res) => {
 
 const listInternships = async (req, res) => {
   try {
-    const internships = await Internship.find();
+    const internships = await Internship.find().populate("enterprise");
 
     res.status(200).send(internships);
   } catch (ex) {
@@ -77,29 +78,31 @@ const updateInternship = async (req, res) => {
   try {
     const { id } = req.params;
     const {
+      position,
       professionalProfile,
       jobProfile,
       benefits,
       workModality,
+      activity,
       weeklyWorkload,
       applicationProcedures,
       available,
-      coordinatorEmail,
-      enterpriseCnpj,
+      enterpriseId,
     } = req.body;
 
     const internship = await Internship.findByIdAndUpdate(
       id,
       {
+        position,
         professionalProfile,
         jobProfile,
         benefits,
         workModality,
+        activity,
         weeklyWorkload,
         applicationProcedures,
         available,
-        coordinatorEmail,
-        enterpriseCnpj,
+        enterpriseId,
       },
       { new: true, runValidators: true }
     );

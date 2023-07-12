@@ -1,29 +1,54 @@
 import Enterprise from "../models/enterpriseModel.js";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+import User from "../models/userModel.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const saveEnterprise = async (req, res) => {
   try {
+    const image = req.file;
     const {
       name,
       description,
       cnpj,
       email,
-      picture,
       city,
       state,
       latitude,
       longitude,
+      coordinatorId,
     } = req.body;
+
+    const coordinator = await User.findById(coordinatorId);
+
+    console.log(coordinator.type);
+    if (coordinator.type !== "coordenador") {
+      return res
+        .status(400)
+        .send(`Empresa deve ser criada por um usuário do tipo coordenador.`);
+    }
+
+    const imagePath = image?.filename;
+    const imageType = image?.mimetype;
 
     await Enterprise.create({
       name,
       description,
       cnpj,
       email,
-      picture,
+      picture: image
+        ? {
+            data: fs.readFileSync(join(__dirname, "..", "uploads", imagePath)),
+            contentType: imageType,
+          }
+        : null,
       city,
       state,
       latitude,
       longitude,
+      coordinator: coordinatorId,
     });
 
     res.status(201).send("Empresa criada.");
@@ -34,9 +59,28 @@ const saveEnterprise = async (req, res) => {
 
 const listEnterprises = async (req, res) => {
   try {
-    const enterprises = await Enterprise.find();
+    const enterprises = await Enterprise.find().populate("coordinator");
 
-    res.status(200).send(enterprises);
+    const enterprisesWithoutPassword = enterprises.map((enterprise) => {
+      return {
+        _id: enterprise._id,
+        name: enterprise.name,
+        description: enterprise.description,
+        cnpj: enterprise.cnpj,
+        email: enterprise.email,
+        city: enterprise.city,
+        state: enterprise.state,
+        latitude: enterprise.latitude,
+        longitude: enterprise.longitude,
+        coordinator: {
+          _id: enterprise.coordinator._id,
+          name: enterprise.coordinator.name,
+          email: enterprise.coordinator.email,
+        },
+      };
+    });
+
+    res.status(200).send(enterprisesWithoutPassword);
   } catch (ex) {
     res.status(400).send(ex?.errors || "Falha ao listar.");
   }
@@ -46,13 +90,30 @@ const findEnterprise = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const enterprise = await Enterprise.findById(id);
+    const enterprise = await Enterprise.findById(id).populate("coordinator");
 
     if (!enterprise) {
       return res.status(404).send(`Não há empresa com o ID ${id}.`);
     }
 
-    res.status(200).send(enterprise);
+    const enterpriseWithoutPassword = {
+      _id: enterprise._id,
+      name: enterprise.name,
+      description: enterprise.description,
+      cnpj: enterprise.cnpj,
+      email: enterprise.email,
+      city: enterprise.city,
+      state: enterprise.state,
+      latitude: enterprise.latitude,
+      longitude: enterprise.longitude,
+      coordinator: {
+        _id: enterprise.coordinator._id,
+        name: enterprise.coordinator.name,
+        email: enterprise.coordinator.email,
+      },
+    };
+
+    res.status(200).send(enterpriseWithoutPassword);
   } catch (ex) {
     res.status(400).send(ex?.errors || "Falha ao obter empresa.");
   }
@@ -76,18 +137,13 @@ const deleteEnterprise = async (req, res) => {
 
 const updateEnterprise = async (req, res) => {
   try {
+    const image = req.file;
     const { id } = req.params;
-    const {
-      name,
-      description,
-      cnpj,
-      email,
-      picture,
-      city,
-      state,
-      latitude,
-      longitude,
-    } = req.body;
+    const { name, description, cnpj, email, city, state, latitude, longitude } =
+      req.body;
+
+    const imagePath = image?.filename;
+    const imageType = image?.mimetype;
 
     const enterprise = await Enterprise.findByIdAndUpdate(
       id,
@@ -96,7 +152,14 @@ const updateEnterprise = async (req, res) => {
         description,
         cnpj,
         email,
-        picture,
+        picture: image
+          ? {
+              data: fs.readFileSync(
+                join(__dirname, "..", "uploads", imagePath)
+              ),
+              contentType: imageType,
+            }
+          : null,
         city,
         state,
         latitude,
