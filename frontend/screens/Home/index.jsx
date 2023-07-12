@@ -7,7 +7,11 @@ import Button from "../../components/Button/index.jsx";
 
 import styles from "./style.js";
 
-export default function Home() {
+export default function Home({ navigation }) {
+  const navigate = path => {
+    navigation.navigate("RoleChoice", { path })
+  }
+
   return (
     <View style={ styles.container }>
       <Image
@@ -24,8 +28,8 @@ export default function Home() {
         </Paragraph>
       </View>
       <View style={ styles.buttons }>
-        <Button>Entrar</Button>
-        <Button type="faded">Registrar-se</Button>
+        <Button behavior={ () => navigate("login") }>Entrar</Button>
+        <Button behavior={ () => navigate("signup") } type="faded">Registrar-se</Button>
       </View>
       <StatusBar style="auto" />
     </View>

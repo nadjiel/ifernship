@@ -7,7 +7,16 @@ import RoleButton from "../../components/RoleButton/index.jsx";
 
 import styles from "./style.js";
 
-export default function RoleChoice() {
+export default function RoleChoice({ navigation, route }) {
+  const navigate = role => {
+    if(route.params.path == "login") {
+      navigation.navigate("Login", { role });
+    }
+    if(route.params.path == "signup") {
+      navigation.navigate("Signup", { role });
+    }
+  }
+
   return (
     <View style={ styles.container }>
       <Image
@@ -21,12 +30,18 @@ export default function RoleChoice() {
         </Paragraph>
       </View>
       <View style={ styles.buttons }>
-        <RoleButton icon={
-          <Image source={ require("../../assets/coordinator.png") } />
-        }>Coordenador</RoleButton>
-        <RoleButton icon={
-          <Image source={ require("../../assets/student.png") } />
-        }>Estudante</RoleButton>
+        <RoleButton
+          behavior={ () => navigate("coordinator") }
+          icon={
+            <Image source={ require("../../assets/coordinator.png") } />
+          }
+        >Coordenador</RoleButton>
+        <RoleButton
+          behavior={ () => navigate("student") }
+          icon={
+            <Image source={ require("../../assets/student.png") } />
+          }
+        >Estudante</RoleButton>
       </View>
       <StatusBar style="auto" />
     </View>
