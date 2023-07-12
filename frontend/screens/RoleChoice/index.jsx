@@ -7,7 +7,7 @@ import RoleButton from "../../components/RoleButton/index.jsx";
 
 import styles from "./style.js";
 
-export default function Home() {
+export default function RoleChoice() {
   return (
     <View style={ styles.container }>
       <Image
