@@ -14,7 +14,6 @@ export default function Home() {
 				source={require('../../assets/logo.png')}
 				style={styles.logo}
 			/>
-			<StatusBar style="auto" />
 
 			<View style={styles.main}>
 				<Title>Bem-vindo de volta</Title>
@@ -25,6 +24,20 @@ export default function Home() {
 					você!
 				</Paragraph>
 			</View>
+
+			<View>
+				<InputText placeholderText={'Nome'} />
+				<InputText
+					placeholderText={'Senha'}
+					secureTextEntryText={true}
+				/>
+			</View>
+
+			<View style={styles.buttons}>
+				<Button>Entrar</Button>
+			</View>
+
+			<StatusBar style="auto" />
 		</View>
 	);
 }
