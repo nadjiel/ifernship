@@ -3,6 +3,7 @@ import { View, Image } from 'react-native';
 
 import Title from '../../components/Title/index.jsx';
 import Paragraph from '../../components/Paragraph/index.jsx';
+import InputText from '../../components/InputText/index.jsx';
 import Button from '../../components/Button/index.jsx';
 
 import styles from './style.js';
