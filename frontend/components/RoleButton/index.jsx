@@ -1,8 +1,8 @@
 import { Container, Title } from "./style.js";
 
-export default function RoleButton({ icon, children }) {
+export default function RoleButton({ behavior, icon, children }) {
   return (
-    <Container>
+    <Container onPress={ behavior }>
       { icon }
       <Title>{ children }</Title>
     </Container>
