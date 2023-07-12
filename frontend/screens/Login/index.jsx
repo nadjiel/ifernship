@@ -7,7 +7,7 @@ import Button from '../../components/Button/index.jsx';
 
 import styles from './style.js';
 
-export default function Home() {
+export default function Login() {
 	return (
 		<View style={styles.container}>
 			<Image
