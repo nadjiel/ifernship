@@ -11,8 +11,23 @@ export default function EstagioForm() {
 				<Title>Adicionar dados do Estágio</Title>
 			</View>
 
+            <View>
+				<InputText
+					placeholderText={'Perfil do Profissional'}
+				/>
+				<InputText placeholderText={'Perfil da vaga'} />
+				<InputText placeholderText={'Benefícios'} />
+				<InputText placeholderText={'Estilo de Trabalho'} />
+				<InputText placeholderText={'Atividade'} />
+				<InputText placeholderText={'Curso'} />
+				<InputText placeholderText={'Carga Horária semanal'} />
+				<InputText placeholderText={'Empresa'} />
+			</View>
+
             
             <StatusBar style="auto" />
 		</View>
+
+        
 	);
 }
