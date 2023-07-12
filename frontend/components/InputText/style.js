@@ -4,7 +4,8 @@ export const Input = styled.TextInput`
 	margin-top: 10px;
 	width: 350px;
 	height: 55px;
-	background-color: #F3F3F3;
+	background-color: #f3f3f3;
 	border-radius: 30px;
 	padding-left: 25px;
+	padding-right: 25px;
 `;
