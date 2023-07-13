@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const schemaValidationLogin = yup.object({
+export const schemaValidationLogin = yup.object().shape({
   email: yup
     .string()
     .email("email inválido")
