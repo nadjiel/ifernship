@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { View, Image } from "react-native";
 
@@ -13,7 +14,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaValidationLogin } from "../../utils/validations.js";
 
-export default function Login({ navigation }) {
+export default function Login() {
   const { login } = useAuthContext();
 
   const {
@@ -31,6 +32,10 @@ export default function Login({ navigation }) {
       console.log(ex);
     }
   }
+
+  useEffect(() => {
+    login("teste@email.com", "123");
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -65,7 +70,7 @@ export default function Login({ navigation }) {
       </View>
 
       <View style={styles.buttons}>
-        <Button behavior={/* handleSubmit(handleLogin) */() => { navigation.navigate("HomeEstagio") }}>Entrar</Button>
+        <Button behavior={handleSubmit(handleLogin)}>Entrar</Button>
       </View>
 
       <StatusBar style="auto" />

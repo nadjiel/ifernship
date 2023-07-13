@@ -5,6 +5,7 @@ import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { AuthProvider } from "./context/auth.js";
 import { Routes } from "./routes/index.js";
+import { useEffect } from "react";
 
 export default function App() {
 	const [fontsLoaded] = useFonts({

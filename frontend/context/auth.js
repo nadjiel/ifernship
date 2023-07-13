@@ -14,9 +14,11 @@ export function AuthProvider({ children }) {
         email,
         password,
       };
-      const response = await API.post("auth/login", data);
+
+      const response = await API.post("user/login", data);
 
       const { user, token } = response.data;
+      console.log(token);
 
       API.defaults.headers.common.Authorization = `Bearer ${token}`;
 
