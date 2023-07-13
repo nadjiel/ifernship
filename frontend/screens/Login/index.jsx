@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaValidationLogin } from "../../utils/validations.js";
 
-export default function Login() {
+export default function Login({ navigation }) {
   const { login } = useAuthContext();
 
   const {
@@ -65,7 +65,7 @@ export default function Login() {
       </View>
 
       <View style={styles.buttons}>
-        <Button onPress={handleSubmit(handleLogin)}>Entrar</Button>
+        <Button behavior={/* handleSubmit(handleLogin) */() => { navigation.navigate("HomeEstagio") }}>Entrar</Button>
       </View>
 
       <StatusBar style="auto" />

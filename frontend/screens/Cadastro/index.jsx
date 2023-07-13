@@ -7,7 +7,7 @@ import InputText from '../../components/InputText/index.jsx';
 
 import styles from './style.js';
 
-export default function Cadastro() {
+export default function Cadastro({ navigation }) {
 	return (
 		<View style={styles.container}>
 			<Image
@@ -36,7 +36,7 @@ export default function Cadastro() {
 			</View>
 
 			<View style={styles.buttons}>
-				<Button type="faded">Cadastrar</Button>
+				<Button type="faded" behavior={ () => {navigation.navigate()} }>Cadastrar</Button>
 			</View>
 			<StatusBar style="auto" />
 		</View>

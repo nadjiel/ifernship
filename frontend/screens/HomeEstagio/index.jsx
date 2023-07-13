@@ -6,7 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import styles from './style.js';
 import Card from '../../components/Card/index.jsx';
 
-export default function Home() {
+export default function HomeEstagio({ navigation }) {
 	const services = [
 		{
 			id: '1',
@@ -76,6 +76,19 @@ export default function Home() {
 						contentContainerStyle={{ paddingBottom: 16 }}
 						renderItem={({ item }) => (
 							<Card
+								onPress={ () => navigation.navigate("AboutInternship", {
+									coordinator: true,
+									enterprise: item.empresa,
+									role: item.cargo,
+									locality: item.address,
+									about: "",
+									profile: "",
+									benefits: "",
+									type: item.estilo,
+									cnpj: "",
+									contact: "",
+									address: item.address
+								}) }
 								src={item.image}
 								enterprise={item.empresa}
 								role={item.cargo}

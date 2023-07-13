@@ -9,20 +9,17 @@ import Button from "../../components/Button/index.jsx";
 
 import { Container, Header, EditButton } from "./style.js";
 
-export default function AboutInternship({
-  coordinator, enterprise, role, locality, about, profile,
-  benefits, type, cnpj, contact, address
-}) {
+export default function AboutInternship({ route, navigation }) {
   return (
     <ScrollView>
       <Container>
         <Header>
           <Title align="left" level={2} color={ theme.fontColors.secondary }>
-            { enterprise }
+            { route.params.enterprise }
           </Title>
           {
-          coordinator ? 
-          <EditButton>
+          route.params.coordinator ? 
+          <EditButton onPress={ () => { navigation.navigate("FormEstagio") }}>
             <Text>Editar</Text>
           </EditButton> :
           <></>
@@ -31,8 +28,8 @@ export default function AboutInternship({
         
         <Label
           image={ <Image source={ require("../../assets/coordinator.png") } /> }
-          title={ role }
-          subtitle={ locality }
+          title={ route.params.role }
+          subtitle={ route.params.locality }
         />
 
         <View>
@@ -40,7 +37,7 @@ export default function AboutInternship({
             Sobre a empresa
           </Title>
           <Paragraph align="left">
-            { about }
+            { route.params.about }
           </Paragraph>
         </View>
 
@@ -49,7 +46,7 @@ export default function AboutInternship({
             Perfil do profissional
           </Title>
           <Paragraph align="left">
-            { profile }
+            { route.params.profile }
           </Paragraph>
         </View>
 
@@ -58,7 +55,7 @@ export default function AboutInternship({
             Benefícios
           </Title>
           <Paragraph align="left">
-            { benefits }
+            { route.params.benefits }
           </Paragraph>
         </View>
 
@@ -67,7 +64,7 @@ export default function AboutInternship({
             Forma de trabalho
           </Title>
           <Paragraph align="left">
-            { type }
+            { route.params.type }
           </Paragraph>
         </View>
 
@@ -76,7 +73,7 @@ export default function AboutInternship({
             CNPJ
           </Title>
           <Paragraph align="left">
-            { cnpj }
+            { route.params.cnpj }
           </Paragraph>
         </View>
 
@@ -85,7 +82,7 @@ export default function AboutInternship({
             Contato
           </Title>
           <Paragraph align="left">
-            { contact }
+            { route.params.contact }
           </Paragraph>
         </View>
 
@@ -103,11 +100,11 @@ export default function AboutInternship({
             Localização
           </Title>
           <Paragraph align="left">
-            { address }
+            { route.params.address }
           </Paragraph>
         </View>
 
-        <Button width="100%">Me candidatar</Button>
+        <Button behavior={ () => { navigation.navigate("ProcessSteps") } } width="100%">Me candidatar</Button>
       </Container>
     </ScrollView>
   );

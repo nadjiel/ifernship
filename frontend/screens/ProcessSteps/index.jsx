@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import { AntDesign } from '@expo/vector-icons';
 import Title from "../../components/Title/index.jsx";
@@ -8,7 +8,7 @@ import StepsCard from "../../components/StepsCard/index.jsx"
 import styles from "./style.js";
 import { Subtitle } from '../../components/StepsCard/style.js';
 
-export default function Home({ navigation }) {
+export default function ProcessSteps({ navigation }) {
     const navigate = path => {
         navigation.navigate("RoleChoice", { path })
     }
