@@ -14,9 +14,7 @@ export default function HomeEstagio({ navigation }) {
   const fetchInternships = async () => {
     try {
       const response = await API.get("/internship");
-      console.log(JSON.stringify(response))
       const internshipsData = response.data;
-      console.log(JSON.stringify(internshipsData))
       setInternships(internshipsData);
     } catch (ex) {
       console.log(ex);
@@ -39,25 +37,24 @@ export default function HomeEstagio({ navigation }) {
                   //os dados n deveriam ser repassados assim, e sim recuperados pela api na outra tela, para evitar problemas de
                   navigation.navigate("AboutInternship", {
                     coordinator: true,
-                    enterprise: item.empresa,
-                    role: item.cargo,
-                    locality: item.address,
-                    about: "",
-                    profile: "",
-                    benefits: "",
-                    type: item.estilo,
-                    cnpj: "",
-                    contact: "",
-                    address: item.address,
+                    enterprise: item.enterprise.name,
+                    role: item.position,
+                    locality: `${item.enterprise.city}, ${item.enterprise.state}`,
+                    about: item.enterprise.description,
+                    profile: item.professionalProfile,
+                    benefits: item.benefits,
+                    type: item.workModality,
+                    cnpj: item.enterprise.cnpj,
+                    contact: item.enterprise.email,
+                    address: `${item.enterprise.city}, ${item.enterprise.state}`,
                   })
                 }
-                //apontar para os dados corretos que vem do back
                 src={item.image}
-                enterprise={item.empresa}
-                role={item.cargo}
-                type={item.estilo}
-                address={item.Local}
-                hoursWeek={item.horasSemana}
+                enterprise={item.enterprise.name}
+                role={item.position}
+                type={item.workModality}
+                address={`${item.enterprise.city}, ${item.enterprise.state}`}
+                hoursWeek={item.weeklyWorkload}
               />
             )}
           />
