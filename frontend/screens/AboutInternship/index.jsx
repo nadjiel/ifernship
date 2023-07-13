@@ -1,4 +1,4 @@
-import { ScrollView, Image, View } from "react-native";
+import { ScrollView, Image, View, Text } from "react-native";
 
 import theme from "../../global/theme.js";
 
@@ -7,18 +7,27 @@ import Label from "../../components/Label/index.jsx";
 import Paragraph from "../../components/Paragraph/index.jsx";
 import Button from "../../components/Button/index.jsx";
 
-import { Container } from "./style.js";
+import { Container, Header, EditButton } from "./style.js";
 
 export default function AboutInternship({
-  enterprise, role, locality, about, profile,
+  coordinator, enterprise, role, locality, about, profile,
   benefits, type, cnpj, contact, address
 }) {
   return (
     <ScrollView>
       <Container>
-        <Title align="left" level={2} color={ theme.fontColors.secondary }>
-          { enterprise }
-        </Title>
+        <Header>
+          <Title align="left" level={2} color={ theme.fontColors.secondary }>
+            { enterprise }
+          </Title>
+          {
+          coordinator ? 
+          <EditButton>
+            <Text>Editar</Text>
+          </EditButton> :
+          <></>
+          }
+        </Header>
         
         <Label
           image={ <Image source={ require("../../assets/coordinator.png") } /> }
