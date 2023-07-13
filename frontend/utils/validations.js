@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const schemaValidationLogin = yup.object({
+export const schemaValidationLogin = yup.object().shape({
   email: yup
     .string()
     .email("email inválido")
@@ -8,7 +8,7 @@ export const schemaValidationLogin = yup.object({
   password: yup.string().required("Por favor, forneça uma senha!"),
 });
 
-export const schemaValidationRegister = yup.object({
+export const schemaValidationRegister = yup.object().shape({
   name: yup.string(),
   course: yup.string(),
   email: yup
@@ -18,7 +18,7 @@ export const schemaValidationRegister = yup.object({
   password: yup.string().required("Por favor, forneça uma senha!"),
 });
 
-export const schemaValidationEnterprise = yup.object({
+export const schemaValidationEnterprise = yup.object().shape({
   name: yup.string().required("Por favor, forneça um nome!"),
   about: yup.string(),
   cnpj: yup.string().required("Por favor, forneça um CNPJ!"),
@@ -31,7 +31,7 @@ export const schemaValidationEnterprise = yup.object({
   longitude: yup.string().required("Por favor, forneça uma senha!"),
 });
 
-export const schemaValidationInternship = yup.object({
+export const schemaValidationInternship = yup.object().shape({
   profile: yup.string().required("Por favor, forneça um perfil!"),
   benefits: yup.string(),
   type: yup.string().required("Por favor, forneça um tipo de trabalho!"),
