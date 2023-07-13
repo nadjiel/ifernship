@@ -1,4 +1,4 @@
-import { Input } from "./style.js";
+import { Input, ErrorInput } from "./style.js";
 import React from "react";
 import { Controller } from "react-hook-form";
 
@@ -30,7 +30,7 @@ export default function InputText({
         )}
         name={name}
       />
-      {/* {!!error && <ErrorInput description={error.message} />} */}
+      {!!error && <ErrorInput>{error.message}</ErrorInput>}
     </>
   );
 }

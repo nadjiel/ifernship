@@ -9,3 +9,7 @@ export const Input = styled.TextInput`
 	padding-left: 25px;
 	padding-right: 25px;
 `;
+
+export const ErrorInput = styled.Text`
+	color: red;
+`;
