@@ -1,122 +1,66 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, SafeAreaView } from 'react-native';
-
-import { MaterialIcons } from '@expo/vector-icons';
-import styles from './style.js';
-import Card from '../../components/Card/index.jsx';
+import { useState } from "react";
+import { Text, View, FlatList, SafeAreaView } from "react-native";
+import styles from "./style.js";
+import Card from "../../components/Card/index.jsx";
+import API from "../../api";
 
 export default function HomeEstagio({ navigation }) {
-	const [internships, setInternships] = useState([]);
+  const [internships, setInternships] = useState([]);
 
-	useEffect(() => {
-		fetchInternships();
-	}, []);
+  useEffect(() => {
+    fetchInternships();
+  }, []);
 
-	const fetchInternships = async () => {
-		try {
-			// no GET tu coloca teu url
-			const response = await axios.get('http://10.3.135.199:8080/internship');
-			const internshipsData = response.data;
-			setInternships(internshipsData);
-		} catch (error) {
-			console.error(error);
-		}
-	};
+  const fetchInternships = async () => {
+    try {
+      const response = await API.get("/internship");
+      const internshipsData = response.data;
+      setInternships(internshipsData);
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
 
-	// const services = [
-	// 	{
-	// 		id: '1',
-	// 		image: 'https://www.apple.com/careers/images/fy22-og-refresh/work_at_apple_OG/desktop.png',
-	// 		empresa: 'Apple',
-	// 		cargo: 'Engenharia de Software',
-	// 		estilo: 'Presencial',
-	// 		Local: 'Cupertino, Califórnia, EUA',
-	// 		horasSemana: '30h',
-	// 	},
-	// 	{
-	// 		id: '2',
-	// 		image: 'https://www.centralxbox.com.br/wp-content/uploads/2020/02/microsoft-gdc-2020.jpg',
-	// 		empresa: 'Microsoft',
-	// 		cargo: 'Engenharia de Software',
-	// 		estilo: 'Presencial',
-	// 		Local: 'Cupertino, Califórnia, EUA',
-	// 		horasSemana: '30h',
-	// 	},
-	// 	{
-	// 		id: '3',
-	// 		image: 'https://www.imobzi.com/papoimobiliario/wp-content/uploads/2022/12/meta-verso.png',
-	// 		empresa: 'Meta',
-	// 		cargo: 'Engenharia de Software',
-	// 		estilo: 'Presencial',
-	// 		Local: 'Cupertino, Califórnia, EUA',
-	// 		horasSemana: '30h',
-	// 	},
-	// 	{
-	// 		id: '4',
-	// 		image: 'https://www.centralxbox.com.br/wp-content/uploads/2020/02/microsoft-gdc-2020.jpg',
-	// 		empresa: 'Samsung',
-	// 		cargo: 'Engenharia de Software',
-	// 		estilo: 'Presencial',
-	// 		Local: 'Cupertino, Califórnia, EUA',
-	// 		horasSemana: '30h',
-	// 	},
-	// 	{
-	// 		id: '5',
-	// 		image: 'https://www.centralxbox.com.br/wp-content/uploads/2020/02/microsoft-gdc-2020.jpg',
-	// 		empresa: 'Tecent',
-	// 		cargo: 'Engenharia de Software',
-	// 		estilo: 'Presencial',
-	// 		Local: 'Cupertino, Califórnia, EUA',
-	// 		horasSemana: '30h',
-	// 	},
-	// 	{
-	// 		id: '6',
-	// 		image: 'https://www.centralxbox.com.br/wp-content/uploads/2020/02/microsoft-gdc-2020.jpg',
-	// 		empresa: 'Tecent',
-	// 		cargo: 'Engenharia de Software',
-	// 		estilo: 'Presencial',
-	// 		Local: 'Cupertino, Califórnia, EUA',
-	// 		horasSemana: '30h',
-	// 	},
-	// ];
-
-	return (
-		<View style={styles.container}>
-			<Text style={styles.tituloPag}>Estágios Disponíveis</Text>
-			<View style={styles.central}>
-				<SafeAreaView>
-					<FlatList
-						data={services}
-						keyExtractor={(item, index) => index.toString()}
-						showsVerticalScrollIndicator={false}
-						contentContainerStyle={{ paddingBottom: 16 }}
-						renderItem={({ item }) => (
-							<Card
-								onPress={() => navigation.navigate("AboutInternship", {
-									coordinator: true,
-									enterprise: item.empresa,
-									role: item.cargo,
-									locality: item.address,
-									about: "",
-									profile: "",
-									benefits: "",
-									type: item.estilo,
-									cnpj: "",
-									contact: "",
-									address: item.address
-								})}
-								src={item.image}
-								enterprise={item.empresa}
-								role={item.cargo}
-								type={item.estilo}
-								address={item.Local}
-								hoursWeek={item.horasSemana}
-							/>
-						)}
-					/>
-				</SafeAreaView>
-			</View>
-		</View>
-	);
+  return (
+    <View style={styles.container}>
+      <Text style={styles.tituloPag}>Estágios Disponíveis</Text>
+      <View style={styles.central}>
+        <SafeAreaView>
+          <FlatList
+            data={internships}
+            keyExtractor={(item, index) => index.toString()}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 16 }}
+            renderItem={({ item }) => (
+              <Card
+                onPress={() =>
+                  //os dados n deveriam ser repassados assim, e sim recuperados pela api na outra tela, para evitar problemas de
+                  navigation.navigate("AboutInternship", {
+                    coordinator: true,
+                    enterprise: item.empresa,
+                    role: item.cargo,
+                    locality: item.address,
+                    about: "",
+                    profile: "",
+                    benefits: "",
+                    type: item.estilo,
+                    cnpj: "",
+                    contact: "",
+                    address: item.address,
+                  })
+                }
+                //apontar para os dados corretos que vem do back
+                src={item.image}
+                enterprise={item.empresa}
+                role={item.cargo}
+                type={item.estilo}
+                address={item.Local}
+                hoursWeek={item.horasSemana}
+              />
+            )}
+          />
+        </SafeAreaView>
+      </View>
+    </View>
+  );
 }

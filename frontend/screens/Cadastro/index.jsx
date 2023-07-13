@@ -11,7 +11,6 @@ import { schemaValidationRegister } from "../../utils/validations.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import API from "../../api/index.js";
-import axios from "axios";
 
 export default function Cadastro({ navigation, route }) {
   const { role } = route.params;
