@@ -30,7 +30,6 @@ export default function Cadastro({ navigation, route }) {
     course = undefined,
   }) {
     try {
-      console.log("register");
       await API.post("user/register", {
         name,
         email,

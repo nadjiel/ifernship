@@ -5,8 +5,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { AuthProvider } from "./context/auth.js";
 import { Routes } from "./routes/index.js";
 
-console.log(process.env.IP_HOST);
-
 export default function App() {
   const [fontsLoaded] = useFonts({
     "assistant-light": require("./assets/fonts/Assistant-Light.ttf"),
