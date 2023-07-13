@@ -3,9 +3,13 @@ import { Text, View, FlatList, SafeAreaView } from "react-native";
 import styles from "./style.js";
 import Card from "../../components/Card/index.jsx";
 import API from "../../api";
+import { useAuthContext } from "../../context/auth.js"
+import Button from "../../components/Button/index.jsx"
 
 export default function HomeEstagio({ navigation }) {
 	const [internships, setInternships] = useState([]);
+
+	const { logout } = useAuthContext();
 
 	useEffect(() => {
 		fetchInternships();
@@ -25,6 +29,9 @@ export default function HomeEstagio({ navigation }) {
 		<View style={styles.container}>
 			<Text style={styles.tituloPag}>Estágios Disponíveis</Text>
 			<View style={styles.central}>
+				<Button onPress={(logout)}>
+					Sair
+				</Button>
 				<SafeAreaView>
 					<FlatList
 						data={internships}
