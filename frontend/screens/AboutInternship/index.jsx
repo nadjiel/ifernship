@@ -7,7 +7,7 @@ import Label from "../../components/Label/index.jsx";
 import Paragraph from "../../components/Paragraph/index.jsx";
 import Button from "../../components/Button/index.jsx";
 
-import { Container, Header, EditButton } from "./style.js";
+import { Container, Header } from "./style.js";
 
 export default function AboutInternship({ route, navigation }) {
   return (
@@ -19,9 +19,14 @@ export default function AboutInternship({ route, navigation }) {
           </Title>
           {
           route.params.coordinator ? 
-          <EditButton onPress={ () => { navigation.navigate("FormEstagio") }}>
-            <Text>Editar</Text>
-          </EditButton> :
+          <View style={ { display: "flex", flexDirection: "row" } }>
+            <Button>
+              <Text>Deletar</Text>
+            </Button>
+            <Button behavior={ () => { navigation.navigate("FormEstagio") }}>
+              <Text>Editar</Text>
+            </Button>
+          </View> :
           <></>
           }
         </Header>
