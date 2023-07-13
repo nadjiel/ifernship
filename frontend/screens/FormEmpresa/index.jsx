@@ -7,6 +7,7 @@ import API from "../../api/";
 import ImagePicker from 'react-native-image-picker';
 import styles from './style.js';
 import { schemaValidationEnterprise } from '../../utils/validations.js';
+import { useForm } from "react-hook-form";
 
 export default function EmpresaForm() {
 	const {
@@ -19,7 +20,7 @@ export default function EmpresaForm() {
 
 	async function handleEnterprise({ name, description, cnpj, email, city, latitude, longitude }) {
 		try {
-			await API.post("enterprise", { name, about, CNPJ, email, city, latitude, longitude });
+			await API.post("enterprise", { name, description, cnpj, email, city, latitude, longitude });
 		} catch (ex) {
 			console.log(ex);
 		}
