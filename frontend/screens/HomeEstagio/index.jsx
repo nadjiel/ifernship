@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Text, View, FlatList, SafeAreaView } from "react-native";
 import styles from "./style.js";
 import Card from "../../components/Card/index.jsx";
@@ -14,7 +14,9 @@ export default function HomeEstagio({ navigation }) {
   const fetchInternships = async () => {
     try {
       const response = await API.get("/internship");
+      console.log(JSON.stringify(response))
       const internshipsData = response.data;
+      console.log(JSON.stringify(internshipsData))
       setInternships(internshipsData);
     } catch (ex) {
       console.log(ex);
