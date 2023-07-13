@@ -1,4 +1,4 @@
-import { ScrollView, Image, View } from "react-native";
+import { ScrollView, Image, View, Text } from "react-native";
 
 import theme from "../../global/theme.js";
 
@@ -7,23 +7,34 @@ import Label from "../../components/Label/index.jsx";
 import Paragraph from "../../components/Paragraph/index.jsx";
 import Button from "../../components/Button/index.jsx";
 
-import { Container } from "./style.js";
+import { Container, Header } from "./style.js";
 
-export default function AboutInternship({
-  enterprise, role, locality, about, profile,
-  benefits, type, cnpj, contact, address
-}) {
+export default function AboutInternship({ route, navigation }) {
   return (
     <ScrollView>
       <Container>
-        <Title align="left" level={2} color={ theme.fontColors.secondary }>
-          { enterprise }
-        </Title>
+        <Header>
+          <Title align="left" level={2} color={ theme.fontColors.secondary }>
+            { route.params.enterprise }
+          </Title>
+          {
+          route.params.coordinator ? 
+          <View style={ { display: "flex", flexDirection: "row" } }>
+            <Button>
+              <Text>Deletar</Text>
+            </Button>
+            <Button behavior={ () => { navigation.navigate("FormEstagio") }}>
+              <Text>Editar</Text>
+            </Button>
+          </View> :
+          <></>
+          }
+        </Header>
         
         <Label
           image={ <Image source={ require("../../assets/coordinator.png") } /> }
-          title={ role }
-          subtitle={ locality }
+          title={ route.params.role }
+          subtitle={ route.params.locality }
         />
 
         <View>
@@ -31,7 +42,7 @@ export default function AboutInternship({
             Sobre a empresa
           </Title>
           <Paragraph align="left">
-            { about }
+            { route.params.about }
           </Paragraph>
         </View>
 
@@ -40,7 +51,7 @@ export default function AboutInternship({
             Perfil do profissional
           </Title>
           <Paragraph align="left">
-            { profile }
+            { route.params.profile }
           </Paragraph>
         </View>
 
@@ -49,7 +60,7 @@ export default function AboutInternship({
             Benefícios
           </Title>
           <Paragraph align="left">
-            { benefits }
+            { route.params.benefits }
           </Paragraph>
         </View>
 
@@ -58,7 +69,7 @@ export default function AboutInternship({
             Forma de trabalho
           </Title>
           <Paragraph align="left">
-            { type }
+            { route.params.type }
           </Paragraph>
         </View>
 
@@ -67,7 +78,7 @@ export default function AboutInternship({
             CNPJ
           </Title>
           <Paragraph align="left">
-            { cnpj }
+            { route.params.cnpj }
           </Paragraph>
         </View>
 
@@ -76,7 +87,7 @@ export default function AboutInternship({
             Contato
           </Title>
           <Paragraph align="left">
-            { contact }
+            { route.params.contact }
           </Paragraph>
         </View>
 
@@ -94,11 +105,11 @@ export default function AboutInternship({
             Localização
           </Title>
           <Paragraph align="left">
-            { address }
+            { route.params.address }
           </Paragraph>
         </View>
 
-        <Button width="100%">Me candidatar</Button>
+        <Button behavior={ () => { navigation.navigate("ProcessSteps") } } width="100%">Me candidatar</Button>
       </Container>
     </ScrollView>
   );

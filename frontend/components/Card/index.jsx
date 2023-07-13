@@ -4,6 +4,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Container, Image, Title, Subtitle, Text, Icon } from './styles.js';
 
 export default function Card({
+	onPress,
 	src,
 	enterprise,
 	role,
@@ -12,7 +13,7 @@ export default function Card({
 	hoursWeek,
 }) {
 	return (
-		<Container>
+		<Container onPress={ onPress }>
 			<Image source={{ uri: src }} />
 
 			<View>
