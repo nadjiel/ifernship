@@ -1,5 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import { View, Image } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { View, Image } from "react-native";
 
 import Title from "../../components/Title/index.jsx";
 import Paragraph from "../../components/Paragraph/index.jsx";
@@ -8,28 +8,26 @@ import Button from "../../components/Button/index.jsx";
 import styles from "./style.js";
 
 export default function Home({ navigation }) {
-  const navigate = path => {
-    navigation.navigate("RoleChoice", { path })
-  }
+  // const navigate = path => {
+  //   navigation.navigate("RoleChoice", { path })
+  // }
 
   return (
-    <View style={ styles.container }>
-      <Image
-        source={ require("../../assets/logo.png") }
-        style={ styles.logo }
-      />
-      <View style={ styles.main }>
+    <View style={styles.container}>
+      <Image source={require("../../assets/logo.png")} style={styles.logo} />
+      <View style={styles.main}>
         <Title>Vagas de Estágios</Title>
         <Paragraph>
-          Encontre o estágio dos seus sonhos e comece a trilhar
-          o caminho para o sucesso profissional! Não perca mais
-          tempo procurando vagas manualmente, baixe agora e comece
-          a construir seu futuro!
+          Encontre o estágio dos seus sonhos e comece a trilhar o caminho para o
+          sucesso profissional! Não perca mais tempo procurando vagas
+          manualmente, baixe agora e comece a construir seu futuro!
         </Paragraph>
       </View>
-      <View style={ styles.buttons }>
-        <Button behavior={ () => navigate("login") }>Entrar</Button>
-        <Button behavior={ () => navigate("signup") } type="faded">Registrar-se</Button>
+      <View style={styles.buttons}>
+        <Button behavior={() => navigation.navigate("Login")}>Entrar</Button>
+        <Button behavior={() => navigation.navigate("RoleChoice")} type="faded">
+          Registrar-se
+        </Button>
       </View>
       <StatusBar style="auto" />
     </View>

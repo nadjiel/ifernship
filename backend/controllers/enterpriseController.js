@@ -23,7 +23,6 @@ const saveEnterprise = async (req, res) => {
 
     const coordinator = await User.findById(coordinatorId);
 
-    console.log(coordinator.type);
     if (coordinator.type !== "coordenador") {
       return res
         .status(400)

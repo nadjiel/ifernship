@@ -1,6 +1,7 @@
 import { Router } from "express";
 import enterpriseController from "../controllers/enterpriseController.js";
 import { verifyTokenAuthentication } from "../middlewares/authentication.js";
+import upload from "../config/upload.js";
 
 const router = Router();
 
@@ -17,6 +18,7 @@ router.get(
 router.post(
   "/",
   verifyTokenAuthentication,
+  upload.single("image"),
   enterpriseController.saveEnterprise
 );
 router.delete(
@@ -27,6 +29,7 @@ router.delete(
 router.put(
   "/:id",
   verifyTokenAuthentication,
+  upload.single("image"),
   enterpriseController.updateEnterprise
 );
 
