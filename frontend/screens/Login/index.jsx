@@ -22,7 +22,7 @@ export default function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schemaValidationLogin),
+    validationSchema: schemaValidationLogin,
   });
 
   async function handleLogin({ email, password }) {
