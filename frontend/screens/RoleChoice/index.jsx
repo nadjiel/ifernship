@@ -23,13 +23,13 @@ export default function RoleChoice({ navigation }) {
       </View>
       <View style={styles.buttons}>
         <RoleButton
-          behavior={() => navigate("coordinator")}
+          behavior={() => navigate("coordenador")}
           icon={<Image source={require("../../assets/coordinator.png")} />}
         >
           Coordenador
         </RoleButton>
         <RoleButton
-          behavior={() => navigate("student")}
+          behavior={() => navigate("estagiário")}
           icon={<Image source={require("../../assets/student.png")} />}
         >
           Estudante

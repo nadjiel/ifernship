@@ -8,10 +8,6 @@ import Button from "../../components/Button/index.jsx";
 import styles from "./style.js";
 
 export default function Home({ navigation }) {
-  // const navigate = path => {
-  //   navigation.navigate("RoleChoice", { path })
-  // }
-
   return (
     <View style={styles.container}>
       <Image source={require("../../assets/logo.png")} style={styles.logo} />

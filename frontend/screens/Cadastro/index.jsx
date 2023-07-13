@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { View, Image, TextInput } from "react-native";
+import { View, Image } from "react-native";
 
 import Title from "../../components/Title/index.jsx";
 import Button from "../../components/Button/index.jsx";
@@ -8,14 +8,18 @@ import InputText from "../../components/InputText/index.jsx";
 import styles from "./style.js";
 import { schemaValidationRegister } from "../../utils/validations.js";
 
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import API from "../../api/index.js";
+
 export default function Cadastro({ navigation, route }) {
-  console.log(route.params);
+  const { role } = route.params;
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    validationSchema: schemaValidationRegister,
+    resolver: yupResolver(schemaValidationRegister),
   });
 
   async function handleRegister({
@@ -23,11 +27,18 @@ export default function Cadastro({ navigation, route }) {
     email,
     password,
     confirmPassword,
-    course,
-    type,
+    course = undefined,
   }) {
     try {
-      await register(name, email, password, confirmPassword, course, type);
+      await API.post("user/register", {
+        name,
+        email,
+        password,
+        confirmPassword,
+        course,
+        type: role,
+      });
+      navigation.navigate("Login");
     } catch (ex) {
       console.log(ex);
     }
@@ -72,23 +83,20 @@ export default function Cadastro({ navigation, route }) {
           secureTextEntryText={true}
           error={errors.confirmPassword}
         />
-        <InputText
-          placeholderText={"Curso"}
-          name="course"
-          control={control}
-          autoCorrect={false}
-          autoCapitalize="none"
-          error={errors.course}
-        />
+        {role === "estagiário" && (
+          <InputText
+            placeholderText={"Curso"}
+            name="course"
+            control={control}
+            autoCorrect={false}
+            autoCapitalize="none"
+            error={errors.course}
+          />
+        )}
       </View>
 
       <View style={styles.buttons}>
-        <Button
-          type="faded"
-          behavior={() => {
-            navigation.navigate("Login");
-          }}
-        >
+        <Button type="faded" behavior={handleSubmit(handleRegister)}>
           Cadastrar
         </Button>
       </View>
