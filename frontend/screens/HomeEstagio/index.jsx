@@ -7,62 +7,79 @@ import styles from './style.js';
 import Card from '../../components/Card/index.jsx';
 
 export default function HomeEstagio({ navigation }) {
-	const services = [
-		{
-			id: '1',
-			image: 'https://www.apple.com/careers/images/fy22-og-refresh/work_at_apple_OG/desktop.png',
-			empresa: 'Apple',
-			cargo: 'Engenharia de Software',
-			estilo: 'Presencial',
-			Local: 'Cupertino, Califórnia, EUA',
-			horasSemana: '30h',
-		},
-		{
-			id: '2',
-			image: 'https://www.centralxbox.com.br/wp-content/uploads/2020/02/microsoft-gdc-2020.jpg',
-			empresa: 'Microsoft',
-			cargo: 'Engenharia de Software',
-			estilo: 'Presencial',
-			Local: 'Cupertino, Califórnia, EUA',
-			horasSemana: '30h',
-		},
-		{
-			id: '3',
-			image: 'https://www.imobzi.com/papoimobiliario/wp-content/uploads/2022/12/meta-verso.png',
-			empresa: 'Meta',
-			cargo: 'Engenharia de Software',
-			estilo: 'Presencial',
-			Local: 'Cupertino, Califórnia, EUA',
-			horasSemana: '30h',
-		},
-		{
-			id: '4',
-			image: 'https://www.centralxbox.com.br/wp-content/uploads/2020/02/microsoft-gdc-2020.jpg',
-			empresa: 'Samsung',
-			cargo: 'Engenharia de Software',
-			estilo: 'Presencial',
-			Local: 'Cupertino, Califórnia, EUA',
-			horasSemana: '30h',
-		},
-		{
-			id: '5',
-			image: 'https://www.centralxbox.com.br/wp-content/uploads/2020/02/microsoft-gdc-2020.jpg',
-			empresa: 'Tecent',
-			cargo: 'Engenharia de Software',
-			estilo: 'Presencial',
-			Local: 'Cupertino, Califórnia, EUA',
-			horasSemana: '30h',
-		},
-		{
-			id: '6',
-			image: 'https://www.centralxbox.com.br/wp-content/uploads/2020/02/microsoft-gdc-2020.jpg',
-			empresa: 'Tecent',
-			cargo: 'Engenharia de Software',
-			estilo: 'Presencial',
-			Local: 'Cupertino, Califórnia, EUA',
-			horasSemana: '30h',
-		},
-	];
+	const [internships, setInternships] = useState([]);
+
+	useEffect(() => {
+		fetchInternships();
+	}, []);
+
+	const fetchInternships = async () => {
+		try {
+			// no GET tu coloca teu url
+			const response = await axios.get('http://10.3.135.199:8080/internship');
+			const internshipsData = response.data;
+			setInternships(internshipsData);
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
+	// const services = [
+	// 	{
+	// 		id: '1',
+	// 		image: 'https://www.apple.com/careers/images/fy22-og-refresh/work_at_apple_OG/desktop.png',
+	// 		empresa: 'Apple',
+	// 		cargo: 'Engenharia de Software',
+	// 		estilo: 'Presencial',
+	// 		Local: 'Cupertino, Califórnia, EUA',
+	// 		horasSemana: '30h',
+	// 	},
+	// 	{
+	// 		id: '2',
+	// 		image: 'https://www.centralxbox.com.br/wp-content/uploads/2020/02/microsoft-gdc-2020.jpg',
+	// 		empresa: 'Microsoft',
+	// 		cargo: 'Engenharia de Software',
+	// 		estilo: 'Presencial',
+	// 		Local: 'Cupertino, Califórnia, EUA',
+	// 		horasSemana: '30h',
+	// 	},
+	// 	{
+	// 		id: '3',
+	// 		image: 'https://www.imobzi.com/papoimobiliario/wp-content/uploads/2022/12/meta-verso.png',
+	// 		empresa: 'Meta',
+	// 		cargo: 'Engenharia de Software',
+	// 		estilo: 'Presencial',
+	// 		Local: 'Cupertino, Califórnia, EUA',
+	// 		horasSemana: '30h',
+	// 	},
+	// 	{
+	// 		id: '4',
+	// 		image: 'https://www.centralxbox.com.br/wp-content/uploads/2020/02/microsoft-gdc-2020.jpg',
+	// 		empresa: 'Samsung',
+	// 		cargo: 'Engenharia de Software',
+	// 		estilo: 'Presencial',
+	// 		Local: 'Cupertino, Califórnia, EUA',
+	// 		horasSemana: '30h',
+	// 	},
+	// 	{
+	// 		id: '5',
+	// 		image: 'https://www.centralxbox.com.br/wp-content/uploads/2020/02/microsoft-gdc-2020.jpg',
+	// 		empresa: 'Tecent',
+	// 		cargo: 'Engenharia de Software',
+	// 		estilo: 'Presencial',
+	// 		Local: 'Cupertino, Califórnia, EUA',
+	// 		horasSemana: '30h',
+	// 	},
+	// 	{
+	// 		id: '6',
+	// 		image: 'https://www.centralxbox.com.br/wp-content/uploads/2020/02/microsoft-gdc-2020.jpg',
+	// 		empresa: 'Tecent',
+	// 		cargo: 'Engenharia de Software',
+	// 		estilo: 'Presencial',
+	// 		Local: 'Cupertino, Califórnia, EUA',
+	// 		horasSemana: '30h',
+	// 	},
+	// ];
 
 	return (
 		<View style={styles.container}>
@@ -76,7 +93,7 @@ export default function HomeEstagio({ navigation }) {
 						contentContainerStyle={{ paddingBottom: 16 }}
 						renderItem={({ item }) => (
 							<Card
-								onPress={ () => navigation.navigate("AboutInternship", {
+								onPress={() => navigation.navigate("AboutInternship", {
 									coordinator: true,
 									enterprise: item.empresa,
 									role: item.cargo,
@@ -88,7 +105,7 @@ export default function HomeEstagio({ navigation }) {
 									cnpj: "",
 									contact: "",
 									address: item.address
-								}) }
+								})}
 								src={item.image}
 								enterprise={item.empresa}
 								role={item.cargo}
