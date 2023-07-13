@@ -29,8 +29,8 @@ export default function HomeEstagio({ navigation }) {
 		<View style={styles.container}>
 			<Text style={styles.tituloPag}>Estágios Disponíveis</Text>
 			<View style={styles.central}>
-				<Button onPress={logout} title="Sair"></Button>
-				<Button title="Criar Empresa"></Button>
+				<Button behavior={logout}>Sair</Button>
+				{/* <Button behavior={ () => navigation.navigate("FormEmpresa") }>AddEmpresa</Button> */}
 				<SafeAreaView>
 					<FlatList
 						data={internships}
