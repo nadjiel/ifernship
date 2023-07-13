@@ -20,10 +20,6 @@ const schema = Schema(
       required: [true, "E-mail da empresa deve ser informado"],
       unique: [true, "E-mail da empresa deve ser único"],
     },
-    picture: {
-      data: Buffer,
-      contentType: String,
-    },
     city: {
       type: String,
       required: [true, "Cidade da empresa deve ser informada"],
@@ -39,12 +35,7 @@ const schema = Schema(
     longitude: {
       type: Number,
       required: [true, "Longitude da empresa deve ser informada"],
-    },
-    coordinator: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: [true, "Id do coordenador deve ser informado"],
-    },
+    }
   },
   { timestamps: true }
 );

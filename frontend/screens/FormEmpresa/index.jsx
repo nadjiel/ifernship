@@ -17,12 +17,8 @@ export default function EmpresaForm() {
 		validationSchema: schemaValidationEnterprise,
 	});
 
-	async function handleEnterprise({ name, description, cnpj, email, city, latitude, longitude }) {
-		try {
-			await API.post("enterprise", { name, description, cnpj, email, city, latitude, longitude });
-		} catch (ex) {
-			console.log(ex);
-		}
+	async function handleEnterprise({ name, description, cnpj, email, city, state, latitude, longitude }) {
+		await API.post("enterprise", { name, description, cnpj, email, city, state, latitude, longitude });
 	}
 
 
@@ -77,6 +73,15 @@ export default function EmpresaForm() {
 					autoCorrect={false}
 					autoCapitalize="none"
 					error={errors.city}
+				/>
+				<InputText
+					placeholderText={'Estado'}
+					name="state"
+					control={control}
+					keyboardType="text"
+					autoCorrect={false}
+					autoCapitalize="none"
+					error={errors.state}
 				/>
 				<InputText
 					placeholderText={'Latitude'}

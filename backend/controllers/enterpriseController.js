@@ -7,53 +7,51 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const saveEnterprise = async (req, res) => {
-  try {
-    const image = req.file;
-    const {
-      name,
-      description,
-      cnpj,
-      email,
-      city,
-      state,
-      latitude,
-      longitude,
-      coordinatorId,
-    } = req.body;
+  // const image = req.file;
+  const {
+    name,
+    description,
+    cnpj,
+    email,
+    city,
+    state,
+    latitude,
+    longitude,
+    // coordinatorId,
+  } = req.body;
 
-    const coordinator = await User.findById(coordinatorId);
+  console.log(req.body)
 
-    if (coordinator.type !== "coordenador") {
-      return res
-        .status(400)
-        .send(`Empresa deve ser criada por um usuário do tipo coordenador.`);
-    }
+  // const coordinator = await User.findById(coordinatorId);
 
-    const imagePath = image?.filename;
-    const imageType = image?.mimetype;
+  // if (coordinator.type !== "coordenador") {
+  //   return res
+  //     .status(400)
+  //     .send(`Empresa deve ser criada por um usuário do tipo coordenador.`);
+  // }
 
-    await Enterprise.create({
-      name,
-      description,
-      cnpj,
-      email,
-      picture: image
-        ? {
-            data: fs.readFileSync(join(__dirname, "..", "uploads", imagePath)),
-            contentType: imageType,
-          }
-        : null,
-      city,
-      state,
-      latitude,
-      longitude,
-      coordinator: coordinatorId,
-    });
+  // const imagePath = image?.filename;
+  // const imageType = image?.mimetype;
 
-    res.status(201).send("Empresa criada.");
-  } catch (ex) {
-    res.status(400).send(ex?.errors || "Falha ao salvar.");
-  }
+  await Enterprise.create({
+    name,
+    description,
+    cnpj,
+    email,
+    // picture: image
+    //   ? {
+    //       data: fs.readFileSync(join(__dirname, "..", "uploads", imagePath)),
+    //       contentType: imageType,
+    //     }
+    //   : null,
+    city,
+    state,
+    latitude,
+    longitude,
+    // coordinator: coordinatorId,
+  });
+
+  res.status(201).send("Empresa criada.");
 };
 
 const listEnterprises = async (req, res) => {
