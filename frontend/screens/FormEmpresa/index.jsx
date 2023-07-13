@@ -4,7 +4,6 @@ import Title from '../../components/Title/index.jsx';
 import Button from '../../components/Button/index.jsx';
 import InputText from '../../components/InputText/index.jsx';
 import API from "../../api/";
-import ImagePicker from 'react-native-image-picker';
 import styles from './style.js';
 import { schemaValidationEnterprise } from '../../utils/validations.js';
 import { useForm } from "react-hook-form";
@@ -36,7 +35,7 @@ export default function EmpresaForm() {
 			<View>
 				<InputText
 					placeholderText={'Nome'}
-					nome="name"
+					name="name"
 					control={control}
 					keyboardType="text"
 					autoCorrect={false}
@@ -45,7 +44,7 @@ export default function EmpresaForm() {
 				/>
 				<InputText
 					placeholderText={'Sobre a Empresa'}
-					nome="description"
+					name="description"
 					control={control}
 					keyboardType="text"
 					autoCorrect={false}
@@ -54,7 +53,7 @@ export default function EmpresaForm() {
 				/>
 				<InputText
 					placeholderText={'CNPJ'}
-					nome="cnpj"
+					name="cnpj"
 					control={control}
 					keyboardType="text"
 					autoCorrect={false}
@@ -63,7 +62,7 @@ export default function EmpresaForm() {
 				/>
 				<InputText
 					placeholderText={'Email'}
-					nome="email"
+					name="email"
 					control={control}
 					keyboardType="email-address"
 					autoCorrect={false}
@@ -72,7 +71,7 @@ export default function EmpresaForm() {
 				/>
 				<InputText
 					placeholderText={'Cidade'}
-					nome="city"
+					name="city"
 					control={control}
 					keyboardType="text"
 					autoCorrect={false}
@@ -81,7 +80,7 @@ export default function EmpresaForm() {
 				/>
 				<InputText
 					placeholderText={'Latitude'}
-					nome="latitude"
+					name="latitude"
 					control={control}
 					keyboardType="number"
 					autoCorrect={false}
@@ -90,14 +89,13 @@ export default function EmpresaForm() {
 				/>
 				<InputText
 					placeholderText={'Longitude'}
-					nome="longitude"
+					name="longitude"
 					control={control}
 					keyboardType="number"
 					autoCorrect={false}
 					autoCapitalize="none"
 					error={errors.longitude}
 				/>
-				<ImagePicker />
 			</View>
 
 			<View style={styles.buttons}>

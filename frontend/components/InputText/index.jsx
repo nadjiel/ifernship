@@ -30,7 +30,7 @@ export default function InputText({
         )}
         name={name}
       />
-      {!!error && <ErrorInput>{error.message}</ErrorInput>}
+      {/* {!!error && <ErrorInput>{error.message}</ErrorInput>} */}
     </>
   );
 }
