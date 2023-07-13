@@ -7,6 +7,32 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const listUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+
+    res.status(200).send(users);
+  } catch (ex) {
+    res.status(400).send(ex?.errors || "Falha ao listar.");
+  }
+};
+
+const findUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).send(`Não há usuário com o ID ${id}.`);
+    }
+
+    res.status(200).send(user);
+  } catch (ex) {
+    res.status(400).send(ex?.errors || "Falha ao obter usuário.");
+  }
+};
+
 const register = async (req, res) => {
   try {
     const { name, email, password, confirmPassword, course, type } = req.body;
@@ -108,8 +134,27 @@ const edit = async (req, res) => {
   }
 };
 
+const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findByIdAndDelete(id);
+
+    if (!user) {
+      return res.status(404).send(`Não há usuário com o ID ${id}.`);
+    }
+
+    res.status(200).send("Usuário deletado com sucesso!");
+  } catch (ex) {
+    res.status(400).send(ex?.errors || "Falha ao deletar.");
+  }
+};
+
 export default {
+  listUsers,
+  findUser,
   register,
   login,
   edit,
+  deleteUser,
 };
