@@ -8,11 +8,8 @@ export default styles = StyleSheet.create({
 		alignItems: 'center',
 		width: '100%',
 	},
-	buttons: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		gap: 25,
-		marginTop: 100,
-		marginHorizontal: 25,
+	buttonC: {
+		marginTop: 50,
+		marginBottom: 20,
 	},
 });
