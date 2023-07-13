@@ -33,10 +33,6 @@ export default function Login() {
     }
   }
 
-  useEffect(() => {
-    login("teste@email.com", "123");
-  }, []);
-
   return (
     <View style={styles.container}>
       <Image source={require("../../assets/logo.png")} style={styles.logo} />
