@@ -1,11 +1,16 @@
 import { useState, useEffect } from "react";
-import { Text, View, FlatList, SafeAreaView } from "react-native";
+import { Text, View, FlatList, SafeAreaView, Button } from "react-native";
 import styles from "./style.js";
 import Card from "../../components/Card/index.jsx";
 import API from "../../api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useAuthContext } from "../../../frontend/context/auth.js"
+import { Title } from "../../components/Card/styles.js";
 
 export default function HomeEstagio({ navigation }) {
   const [internships, setInternships] = useState([]);
+
+  const { logout } = useAuthContext();
 
   useEffect(() => {
     fetchInternships();
@@ -25,6 +30,7 @@ export default function HomeEstagio({ navigation }) {
     <View style={styles.container}>
       <Text style={styles.tituloPag}>Estágios Disponíveis</Text>
       <View style={styles.central}>
+        <Button onPress={logout} title="Sair"></Button>
         <SafeAreaView>
           <FlatList
             data={internships}
