@@ -8,10 +8,7 @@ import styles from './style.js';
 import { schemaValidationInternship } from '../../utils/validations.js';
 import { useForm } from 'react-hook-form';
 
-import styles from './style.js';
-
 export default function EstagioForm() {
-
 	const {
 		control,
 		handleSubmit,
@@ -29,9 +26,7 @@ export default function EstagioForm() {
 		curso,
 		cargaH,
 		empresa,
-	})
-
-	{
+	}) {
 		try {
 			await API.post('enterprise', {
 				perfilProf,
