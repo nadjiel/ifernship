@@ -34,10 +34,6 @@ const schema = Schema(
       type: Number,
       required: [true, "Carga horária semanal deve ser informada"],
     },
-    applicationProcedures: {
-      type: String,
-      required: [true, "Procedimentos de candidatura devem ser informados"],
-    },
     available: {
       type: Boolean,
       required: [true, "Disponibilidade deve ser informada"],

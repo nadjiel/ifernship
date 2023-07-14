@@ -31,6 +31,7 @@ export default function HomeEstagio({ navigation }) {
 			<View style={styles.central}>
 				<Button behavior={logout}>Sair</Button>
 				<Button behavior={ () => navigation.navigate("FormEmpresa") }>AddEmpresa</Button>
+				<Button behavior={ () => navigation.navigate("FormEstagio") }>AddEstagio</Button>
 				<SafeAreaView>
 					<FlatList
 						data={internships}

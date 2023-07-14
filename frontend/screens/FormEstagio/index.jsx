@@ -18,29 +18,25 @@ export default function EstagioForm() {
 	});
 
 	async function handleInternship({
-		perfilProf,
-		perfilVaga,
-		beneficios,
-		estilo,
-		atividade,
-		curso,
-		cargaH,
-		empresa,
+		professionalProfile,
+		jobProfile,
+		benefits,
+		workModality,
+		activity,
+		weeklyWorkload,
+		enterprise,
+		position
 	}) {
-		try {
-			await API.post('enterprise', {
-				perfilProf,
-				perfilVaga,
-				beneficios,
-				estilo,
-				atividade,
-				curso,
-				cargaH,
-				empresa,
-			});
-		} catch (ex) {
-			console.log(ex);
-		}
+		await API.post('internship', {
+			professionalProfile,
+			jobProfile,
+			benefits,
+			workModality,
+			activity,
+			weeklyWorkload,
+			enterprise,
+			position
+		});
 	}
 
 	return (
@@ -52,75 +48,75 @@ export default function EstagioForm() {
 			<View>
 				<InputText
 					placeholderText={'Perfil do profissional'}
-					name="perfilProf"
+					name="professionalProfile"
 					control={control}
 					keyboardType="text"
 					autoCorrect={false}
 					autoCapitalize="none"
-					error={errors.perfilProf}
+					error={errors.professionalProfile}
 				/>
 				<InputText
 					placeholderText={'Perfil da vaga'}
-					name="perfilVaga"
+					name="jobProfile"
 					control={control}
 					keyboardType="text"
 					autoCorrect={false}
 					autoCapitalize="none"
-					error={errors.perfilVaga}
+					error={errors.jobProfile}
 				/>
 				<InputText
 					placeholderText={'Benefícios'}
-					name="beneficios"
+					name="benefits"
 					control={control}
 					keyboardType="text"
 					autoCorrect={false}
 					autoCapitalize="none"
-					error={errors.beneficios}
+					error={errors.benefits}
 				/>
 				<InputText
 					placeholderText={'Estilo de trabalho'}
-					name="estilo"
+					name="workModality"
 					control={control}
 					keyboardType="email-address"
 					autoCorrect={false}
 					autoCapitalize="none"
-					error={errors.estilo}
+					error={errors.workModality}
 				/>
 				<InputText
 					placeholderText={'Atividade'}
-					name="atividade"
+					name="activity"
 					control={control}
 					keyboardType="text"
 					autoCorrect={false}
 					autoCapitalize="none"
-					error={errors.atividade}
+					error={errors.activity}
 				/>
 				<InputText
-					placeholderText={'Curso'}
-					name="curso"
+					placeholderText={'Cargo'}
+					name="position"
 					control={control}
 					keyboardType="number"
 					autoCorrect={false}
 					autoCapitalize="none"
-					error={errors.curso}
+					error={errors.position}
 				/>
 				<InputText
 					placeholderText={'Carga horária semanal'}
-					name="cargaH"
+					name="weeklyWorkload"
 					control={control}
 					keyboardType="number"
 					autoCorrect={false}
 					autoCapitalize="none"
-					error={errors.cargaH}
+					error={errors.weeklyWorkload}
 				/>
 				<InputText
 					placeholderText={'Empresa'}
-					name="empresa"
+					name="enterprise"
 					control={control}
 					keyboardType="number"
 					autoCorrect={false}
 					autoCapitalize="none"
-					error={errors.empresa}
+					error={errors.enterprise}
 				/>
 			</View>
 

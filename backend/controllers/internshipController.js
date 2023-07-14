@@ -1,35 +1,31 @@
 import Internship from "../models/internshipModel.js";
 
 const saveInternship = async (req, res) => {
-  try {
-    const {
-      position,
-      professionalProfile,
-      jobProfile,
-      benefits,
-      workModality,
-      activity,
-      weeklyWorkload,
-      applicationProcedures,
-      enterpriseId,
-    } = req.body;
+  const {
+    position,
+    professionalProfile,
+    jobProfile,
+    benefits,
+    workModality,
+    activity,
+    weeklyWorkload,
+    enterpriseId,
+  } = req.body;
 
-    await Internship.create({
-      position,
-      professionalProfile,
-      jobProfile,
-      benefits,
-      workModality,
-      activity,
-      weeklyWorkload,
-      applicationProcedures,
-      enterpriseId,
-    });
+  console.log(req.body)
 
-    res.status(201).send("Estágio criado.");
-  } catch (ex) {
-    res.status(400).send(ex?.errors || "Falha ao salvar.");
-  }
+  await Internship.create({
+    position,
+    professionalProfile,
+    jobProfile,
+    benefits,
+    workModality,
+    activity,
+    weeklyWorkload,
+    enterpriseId,
+  });
+
+  res.status(201).send("Estágio criado.");
 };
 
 const listInternships = async (req, res) => {
