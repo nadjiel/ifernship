@@ -1,4 +1,5 @@
 import { ScrollView, Image, View, Text } from "react-native";
+import MapView, { Marker } from "react-native-maps";
 
 import theme from "../../global/theme.js";
 
@@ -14,85 +15,73 @@ export default function AboutInternship({ route, navigation }) {
     <ScrollView>
       <Container>
         <Header>
-          <Title align="left" level={2} color={ theme.fontColors.secondary }>
-            { route.params.enterprise }
+          <Title align="left" level={2} color={theme.fontColors.secondary}>
+            {route.params.enterprise}
           </Title>
-          {
-          route.params.coordinator ? 
-          <View style={ { display: "flex", flexDirection: "row" } }>
-            <Button>
-              <Text>Deletar</Text>
-            </Button>
-            <Button behavior={ () => { navigation.navigate("FormEstagio") }}>
-              <Text>Editar</Text>
-            </Button>
-          </View> :
-          <></>
-          }
         </Header>
-        
+
         <Label
-          image={ <Image source={ require("../../assets/coordinator.png") } /> }
-          title={ route.params.role }
-          subtitle={ route.params.locality }
+          image={<Image source={require("../../assets/coordinator.png")} />}
+          title={route.params.role}
+          subtitle={route.params.locality}
         />
 
         <View>
-          <Title align="left" level={3} color={ theme.fontColors.secondary }>
+          <Title align="left" level={3} color={theme.fontColors.secondary}>
             Sobre a empresa
           </Title>
           <Paragraph align="left">
-            { route.params.about }
+            {route.params.about}
           </Paragraph>
         </View>
 
         <View>
-          <Title align="left" level={3} color={ theme.fontColors.secondary }>
+          <Title align="left" level={3} color={theme.fontColors.secondary}>
             Perfil do profissional
           </Title>
           <Paragraph align="left">
-            { route.params.profile }
+            {route.params.profile}
           </Paragraph>
         </View>
 
         <View>
-          <Title align="left" level={3} color={ theme.fontColors.secondary }>
+          <Title align="left" level={3} color={theme.fontColors.secondary}>
             Benefícios
           </Title>
           <Paragraph align="left">
-            { route.params.benefits }
+            {route.params.benefits}
           </Paragraph>
         </View>
 
         <View>
-          <Title align="left" level={3} color={ theme.fontColors.secondary }>
+          <Title align="left" level={3} color={theme.fontColors.secondary}>
             Forma de trabalho
           </Title>
           <Paragraph align="left">
-            { route.params.type }
+            {route.params.type}
           </Paragraph>
         </View>
 
         <View>
-          <Title align="left" level={3} color={ theme.fontColors.secondary }>
+          <Title align="left" level={3} color={theme.fontColors.secondary}>
             CNPJ
           </Title>
           <Paragraph align="left">
-            { route.params.cnpj }
+            {route.params.cnpj}
           </Paragraph>
         </View>
 
         <View>
-          <Title align="left" level={3} color={ theme.fontColors.secondary }>
+          <Title align="left" level={3} color={theme.fontColors.secondary}>
             Contato
           </Title>
           <Paragraph align="left">
-            { route.params.contact }
+            {route.params.contact}
           </Paragraph>
         </View>
 
         <View>
-          <Title align="left" level={3} color={ theme.fontColors.secondary }>
+          <Title align="left" level={3} color={theme.fontColors.secondary}>
             Venha estagiar conosco
           </Title>
           <Paragraph align="left">
@@ -101,15 +90,36 @@ export default function AboutInternship({ route, navigation }) {
         </View>
 
         <View>
-          <Title align="left" level={3} color={ theme.fontColors.secondary }>
+          <Title align="left" level={3} color={theme.fontColors.secondary}>
             Localização
           </Title>
           <Paragraph align="left">
-            { route.params.address }
+            {route.params.address}
           </Paragraph>
         </View>
 
-        <Button behavior={ () => { navigation.navigate("ProcessSteps") } } width="100%">Me candidatar</Button>
+        <MapView
+          style={{
+            height: 200,
+            width: "100%"
+          }}
+          zoomEnabled={false}
+          scrollEnabled={false}
+          pitchEnabled={false}
+          region={{
+            latitude: route.params.latitude,
+            longitude: route.params.longitude,
+            latitudeDelta: 1,
+            longitudeDelta: 1
+          }}
+        >
+          <Marker coordinate={{
+            latitude: route.params.latitude,
+            longitude: route.params.longitude
+          }} />
+        </MapView>
+
+        <Button behavior={() => { navigation.navigate("ProcessSteps") }} width="100%">Me candidatar</Button>
       </Container>
     </ScrollView>
   );
