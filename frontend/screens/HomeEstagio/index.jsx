@@ -53,6 +53,8 @@ export default function HomeEstagio({ navigation }) {
 										cnpj: item.enterprise.cnpj,
 										contact: item.enterprise.email,
 										address: `${item.enterprise.city}, ${item.enterprise.state}`,
+										latitude: item.enterprise.latitude,
+										longitude: item.enterprise.longitude
 									})
 								}
 								src={item.image}
