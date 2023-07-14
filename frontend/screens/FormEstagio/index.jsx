@@ -13,24 +13,87 @@ export default function EstagioForm() {
 				<Title>Adicionar dados do Estágio</Title>
 			</View>
 
-            <View>
+			<View>
 				<InputText
-					placeholderText={'Perfil do Profissional'}
+					placeholderText={'Perfil do profissional'}
+					name="perfilProf"
+					control={control}
+					keyboardType="text"
+					autoCorrect={false}
+					autoCapitalize="none"
+					error={errors.perfilProf}
 				/>
-				<InputText placeholderText={'Perfil da vaga'} />
-				<InputText placeholderText={'Benefícios'} />
-				<InputText placeholderText={'Estilo de Trabalho'} />
-				<InputText placeholderText={'Atividade'} />
-				<InputText placeholderText={'Curso'} />
-				<InputText placeholderText={'Carga Horária semanal'} />
-				<InputText placeholderText={'Empresa'} />
+				<InputText
+					placeholderText={'Perfil da vaga'}
+					name="perfilVaga"
+					control={control}
+					keyboardType="text"
+					autoCorrect={false}
+					autoCapitalize="none"
+					error={errors.perfilVaga}
+				/>
+				<InputText
+					placeholderText={'Benefícios'}
+					name="beneficios"
+					control={control}
+					keyboardType="text"
+					autoCorrect={false}
+					autoCapitalize="none"
+					error={errors.beneficios}
+				/>
+				<InputText
+					placeholderText={'Estilo de trabalho'}
+					name="estilo"
+					control={control}
+					keyboardType="email-address"
+					autoCorrect={false}
+					autoCapitalize="none"
+					error={errors.estilo}
+				/>
+				<InputText
+					placeholderText={'Atividade'}
+					name="atividade"
+					control={control}
+					keyboardType="text"
+					autoCorrect={false}
+					autoCapitalize="none"
+					error={errors.atividade}
+				/>
+				<InputText
+					placeholderText={'Curso'}
+					name="curso"
+					control={control}
+					keyboardType="number"
+					autoCorrect={false}
+					autoCapitalize="none"
+					error={errors.curso}
+				/>
+				<InputText
+					placeholderText={'Carga horária semanal'}
+					name="cargaH"
+					control={control}
+					keyboardType="number"
+					autoCorrect={false}
+					autoCapitalize="none"
+					error={errors.cargaH}
+				/>
+				<InputText
+					placeholderText={'Empresa'}
+					name="empresa"
+					control={control}
+					keyboardType="number"
+					autoCorrect={false}
+					autoCapitalize="none"
+					error={errors.empresa}
+				/>
 			</View>
 
-            <View style={styles.buttons}>
-				<Button>Adicionar</Button>
+			<View style={styles.buttons}>
+				<Button behavior={handleSubmit(handleInternship)}>
+					Finalizar
+				</Button>
 			</View>
-
-            <StatusBar style="auto" />
+			<StatusBar style="auto" />
 		</View>
 	);
 }
