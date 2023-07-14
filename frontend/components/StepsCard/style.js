@@ -1,11 +1,11 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
 export const Container = styled.Pressable`
 	width: 350px;
 	height: 255px;
 	margin: 10px;
-	background-color: white;
-	padding: 10px;
+	background-color: ${({ color }) => (color ? color : '#f3f3f3')};
+	padding: 30px;
 	border-radius: 20px;
 	background-color: #f3f3f3;
 `;
@@ -23,7 +23,7 @@ export const Subtitle = styled.Text`
 	margin-top: -3px;
 	padding-left: 10px;
 	font-size: 16px;
-	color: #717171;
+	color: #323131;
 	font-weight: bold;
 `;
 
@@ -32,5 +32,5 @@ export const Text = styled.Text`
 	margin-top: 6px;
 	padding-left: 10px;
 	font-size: 16px;
-	color: #838c95;
+	color: #0c0c0c;
 `;

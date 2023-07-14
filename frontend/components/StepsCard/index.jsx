@@ -1,12 +1,11 @@
-import { View } from "react-native";
-import { Container } from "./style.js";
+import { Container, Title, Subtitle, Text } from './style.js';
 
-export default function StepsCard({
-}) {
+export default function StepsCard({ title, subtitle, text, color }) {
 	return (
-		<Container>
-			<View>
-			</View>
+		<Container color={color}>
+			<Title>{title}</Title>
+			<Subtitle>{subtitle}</Subtitle>
+			<Text>{text}</Text>
 		</Container>
 	);
 }
