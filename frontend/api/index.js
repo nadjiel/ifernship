@@ -1,8 +1,8 @@
 import axios from "axios";
-import { IP_HOST } from "@env";
+import { API_URL } from "@env";
 
 const api = axios.create({
-  baseURL: `http://${IP_HOST}:8080/`,
+  baseURL: `${API_URL}/`,
 });
 
 function doNothing(res) {

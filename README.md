@@ -11,5 +11,5 @@ IP_HOST={{seu_ip}}
 ```
 ##.env frontend
 ```
-IP_HOST={{seu_ip}}
+API_URL = <URL da API do backend>
 ```
