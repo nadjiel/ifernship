@@ -31,4 +31,4 @@ async function start() {
   }
 }
 
-app.listen(PORT, process.env.IP_HOST, start);
+app.listen(PORT, start);
