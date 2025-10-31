@@ -1,0 +1,22 @@
+services:
+
+  db:
+    image: mongo:7
+    restart: unless-stopped
+    ports:
+      - 27017:27017
+    env_file: .env
+    volumes:
+      - db_data:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    healthcheck:
+      test: >
+        mongosh --quiet --username "$$MONGODB_USER" --password "$$MONGODB_PASSWORD"
+        --authenticationDatabase admin --eval "db.adminCommand('ping')" || exit 1
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+volumes:
+  db_data:
